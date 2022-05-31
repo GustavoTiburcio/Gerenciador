@@ -39,7 +39,7 @@ function ProductsMaterialTable() {
       let response = await api.get('/categories');
       response.data.categories.unshift({ name: '' });
       let cat = response.data.categories.map(category => {
-        return category.name
+        return category.category
       });
       cat = { ...cat };
       delete cat['0'];
