@@ -11,13 +11,7 @@ function ProductsMaterialTable() {
   //   { name: 'Felipe', email: 'felipe@gmail.com', phone: 4434561230, age: null, gender: 'M', city: 'Sarandi', fee: 45323 },
   //   { name: 'Leonardo', email: 'leonardo@gmail.com', phone: 4444561230, age: 35, gender: 'F', city: 'Marialva', fee: 45789 },
   // ]);
-  const [tableData, setTableData] = useState([
-    { id: 1, name: "pizza bacon", price: 18.9, category_id: 2, },
-    { id: 2, name: "pizza calabresa", price: 18.9, category_id: 2, },
-    { id: 3, name: "lanche calabresa", price: 14.9, category_id: 3, },
-    { id: 4, name: "lanche hamburguer", price: 14.9, category_id: 3, },
-    { id: 5, name: "Halls", price: 2.9, category_id: 1, }
-  ]);
+  const [tableData, setTableData] = useState([]);
   const columns = [
     { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por código', align: 'left', defaultSort: 'asc' },
     { title: 'Nome', field: 'name', filterPlaceholder: 'Filtrar por Nome' },
@@ -27,7 +21,8 @@ function ProductsMaterialTable() {
   ]
 
   async function getProducts() {
-    const response = api.get('/products')
+    const response = await api.get('/products');
+    setTableData(response.data.products);
     console.log(response.data)
   }
 

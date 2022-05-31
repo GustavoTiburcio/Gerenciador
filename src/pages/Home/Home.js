@@ -12,13 +12,13 @@ function Home() {
       <Header />
       <div className={styles.body}>
         <div className={styles.titlesDiv}>
-          <h1 className={styles.title}>Gerencie os pedidos do<br /> seu restaurante!!</h1>
-          <h3 className={styles.homeSubtitle}>Controle de mesas, produtos, vendas...</h3>
+          <h1 className={styles.title}>Gerenciador de pedidos <br /> para o seu restaurante!!</h1>
+          <h3 className={styles.homeSubtitle}>Tenha controle de Mesas, Produtos, Vendas...</h3>
           <Link to="/produtos" className={styles.homeButton}>
             COMEÇAR
           </Link>
         </div>
-        <img src={require('../../assets/pizza-house-vector.png')} className={styles.image} />
+        <img src={require('../../assets/pizza-house-vector.png')} className={styles.image} alt={'Cartão de entrada'} />
       </div>
       <Footer />
     </div>
