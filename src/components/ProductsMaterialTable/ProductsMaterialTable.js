@@ -3,13 +3,12 @@ import MaterialTable from 'material-table';
 import { useEffect, useState } from 'react';
 // import GetAppIcon from '@mui/icons-material/GetApp';
 import api from '../../services/api';
-// import { Alert } from '@mui/material';
 
 function ProductsMaterialTable() {
   const [tableData, setTableData] = useState([]);
   const [categories, setCategories] = useState({ 1: '' });
   const columns = [
-    { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por código', align: 'left', defaultSort: 'asc', editable: 'never' },
+    { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
     { title: 'Nome', field: 'name', filterPlaceholder: 'Filtrar por Nome' },
     { title: 'Preço', field: 'price', filterPlaceholder: 'Filtrar por Preço', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
     { title: 'Categoria', field: 'category_id', lookup: categories, filterPlaceholder: 'Filtrar por Categoria', align: 'left' },

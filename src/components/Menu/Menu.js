@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaHome, FaProductHunt } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
+import { MdAppRegistration } from "react-icons/md";
 
 
 const Menu = () => (
@@ -13,7 +14,12 @@ const Menu = () => (
             </li>
             <li style={styles.menuItem}>
                 <Link to="/produtos">
-                    <FaProductHunt size={35} color={'#FFF'} />
+                    <MdAppRegistration size={35} color={'#FFF'} />
+                </Link>
+            </li>
+            <li style={styles.menuItem}>
+                <Link to="/categorias">
+                    <MdAppRegistration size={35} color={'#FFF'} />
                 </Link>
             </li>
         </ul>

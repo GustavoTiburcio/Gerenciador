@@ -1,9 +1,9 @@
 import React from 'react'
 import Menu from '../Menu/Menu'
-import SocialNetworks from '../SocialNetworks/SocialNetworks';
+// import SocialNetworks from '../SocialNetworks/SocialNetworks';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
-import { GiFullPizza } from "react-icons/gi";
+// import { GiFullPizza } from "react-icons/gi";
 
 
 const Header = () => {

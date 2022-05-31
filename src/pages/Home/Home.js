@@ -10,9 +10,14 @@ function Home() {
   return (
     <div className={styles.container}>
       <Header />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className={styles.body}>
         <div className={styles.titlesDiv}>
-          <h1 className={styles.title}>Gerenciador de pedidos <br /> para o seu restaurante!!</h1>
+          <h2 className={styles.title}>Gerenciador de pedidos <br /> para o seu restaurante!!</h2>
           <h3 className={styles.homeSubtitle}>Tenha controle de Mesas, Produtos, Vendas...</h3>
           <Link to="/produtos" className={styles.homeButton}>
             COMEÇAR
@@ -37,8 +42,7 @@ const useStyles = makeStyles({
     flexDirection: 'column'
   },
   image: {
-    height: 500,
-
+    height: 600,
   },
   title: {
     fontWeight: 'bold',
