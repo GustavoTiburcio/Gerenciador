@@ -22,6 +22,11 @@ const Menu = () => (
                     <MdAppRegistration size={35} color={'#FFF'} />
                 </Link>
             </li>
+            <li style={styles.menuItem}>
+                <Link to="/mesas">
+                    <MdAppRegistration size={35} color={'#FFF'} />
+                </Link>
+            </li>
         </ul>
     </nav>
 )
