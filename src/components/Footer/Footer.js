@@ -2,6 +2,7 @@ import React from 'react'
 
 const Footer = () => (
     <footer style={styles.footer}>
+        <></>
         <span style={styles.footerMessage}>
             Desenvolvido por Gustavo Tiburcio
         </span>
@@ -10,13 +11,15 @@ const Footer = () => (
 
 const styles = {
     footer: {
+        bottom: 0,
         background: '#263238',
         textAlign: 'center',
-        width: '100%',
-        position: 'absolute',
         left: 0,
-        bottom: 0,
-        right: 0,
+        position: 'relative',
+        width: '100%',
+        height: '2em',
+        verticalAlign: 'center'
+
     },
     footerMessage: {
         color: '#FFF',

@@ -10,13 +10,14 @@ const Header = () => {
     const styles = useStyles();
     return (
         <header className={styles.header}>
-            <div className={styles.headerBarTop}>
+            {/* <div className={styles.headerBarTop}>
                 <SocialNetworks />
-            </div>
+            </div> */}
             <header className={styles.headerBarBottom}>
                 <div className={styles.headerLogo}>
                     <Link to="/" className={styles.logoText}>
-                        <h3><GiFullPizza size={'medium'}/></h3>
+                        {/* <h3><GiFullPizza size={'medium'}/></h3> */}
+                        <h3>Gerenciador</h3>
                     </Link>
                 </div>
                 <Menu />
