@@ -13,12 +13,10 @@ function Home() {
       <br />
       <br />
       <br />
-      <br />
-      <br />
       <div className={styles.body}>
         <div className={styles.titlesDiv}>
           <h2 className={styles.title}>Gerenciador de pedidos <br /> para o seu restaurante!!</h2>
-          <h3 className={styles.homeSubtitle}>Tenha controle de Mesas, Produtos, Vendas...</h3>
+          <h3 className={styles.homeSubtitle}>Controle de atendimento, Cadastros, Histórico, Integração mobile...</h3>
           <Link to="/produtos" className={styles.homeButton}>
             COMEÇAR
           </Link>

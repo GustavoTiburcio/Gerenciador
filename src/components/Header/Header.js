@@ -52,7 +52,7 @@ const useStyles = makeStyles({
     logoText: {
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 24,
+        fontSize: 20,
         color: '#FFF',
         textDecoration: 'none',
     }

@@ -8,9 +8,9 @@ function TablesMaterialTable() {
   const [tableData, setTableData] = useState([]);
   const columns = [
     { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
-    { title: 'Número', field: 'number', filterPlaceholder: 'Filtrar por Número' },
-    { title: 'Disponível', field: 'available', lookup: { true: 'Sim', false: 'Não' }, filterPlaceholder: 'Filtrar por Disponibilidade', editable: 'never' },
-    { title: 'Cliente', field: 'customer', filterPlaceholder: 'Filtrar por Cliente', editable: 'never', emptyDataSourceMessage: 'Sem cliente' },
+    { title: 'Número da mesa', field: 'number', filterPlaceholder: 'Filtrar por Número' },
+    { title: 'Disponível', field: 'available', lookup: { true: 'Sim', false: 'Não' }, filterPlaceholder: 'Filtrar por Disponibilidade', emptyValue: 'Sim', editable: 'never' },
+    { title: 'Cliente', field: 'customer', filterPlaceholder: 'Filtrar por Cliente', editable: 'never', emptyValue: 'Mesa vazia.. 😥' },
   ]
 
   async function addTable(newTable) {
@@ -65,6 +65,7 @@ function TablesMaterialTable() {
         data={tableData}
         editable={{
           onRowAdd: (newRow) => new Promise((resolve, reject) => {
+            newRow['available'] = true;
             addTable(newRow).then(result => {
               setTableData([...tableData, result.data.createdTable])
               resolve();
@@ -109,10 +110,11 @@ function TablesMaterialTable() {
         options={{
           sorting: true, searchAutoFocus: true,
           filtering: true, pageSizeOptions: [2, 5, 10, 20, 25, 50, 100],
-          pageSize: 10, paginationType: 'stepped',
+          pageSize: 5, paginationType: 'stepped',
           paginationPosition: 'bottom', exportButton: true,
           addRowPosition: 'first', actionsColumnIndex: -1,
           rowStyle: (data, index) => index % 2 === 0 ? { background: '#f5f5f5' } : null,
+          draggable: true,
           headerStyle: { background: '#f3f3f3', fontStyle: 'italic', fontWeight: 'bold' }
         }}
         localization={{
@@ -149,6 +151,7 @@ function TablesMaterialTable() {
         }}
         title='Mesas'
       />
+      <br />
     </div>
   );
 }

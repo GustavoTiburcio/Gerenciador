@@ -107,7 +107,7 @@ function CategoriesMaterialTable() {
         options={{
           sorting: true, searchAutoFocus: true,
           filtering: true, pageSizeOptions: [2, 5, 10, 20, 25, 50, 100],
-          pageSize: 10, paginationType: 'stepped',
+          pageSize: 5, paginationType: 'stepped',
           paginationPosition: 'bottom', exportButton: true,
           addRowPosition: 'first', actionsColumnIndex: -1,
           rowStyle: (data, index) => index % 2 === 0 ? { background: '#f5f5f5' } : null,
@@ -147,6 +147,7 @@ function CategoriesMaterialTable() {
         }}
         title='Categorias'
       />
+      <br />
     </div>
   );
 }
