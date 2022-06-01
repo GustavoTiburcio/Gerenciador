@@ -41,7 +41,7 @@ const Menu = () => {
                     </Link>
                 </li>
                 <li className={styles.menuItem}>
-                    <Link to="/" className={styles.link}>
+                    <Link to="/historicoVendas" className={styles.link}>
                         <FaBook size={35} color={'#FFF'} />
                         <span className={styles.text}>Histórico</span>
                     </Link>
