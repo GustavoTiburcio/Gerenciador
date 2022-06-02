@@ -7,6 +7,7 @@ import Categories from '../../pages/Categories/Categories';
 import Tables from '../../pages/Tables/Tables';
 import OrderHistory from '../../pages/OrderHistory/OrderHistory';
 import OrderProducts from '../../pages/OrderProducts/OrderProducts';
+import Services from '../../pages/Services/Services';
 
 const Router = () => {
     return (
@@ -18,6 +19,7 @@ const Router = () => {
                 <Route element={<Tables />} path='/mesas' />
                 <Route element={<OrderHistory />} path='/historicoVendas' />
                 <Route element={<OrderProducts />} path='/produtosVenda' />
+                <Route element={<Services />} path='/comandas' />
             </Routes>
         </BrowserRouter>
     )

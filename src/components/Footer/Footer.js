@@ -17,13 +17,13 @@ const styles = {
         left: 0,
         position: 'fixed',
         width: '100%',
-        height: '2em',
-        verticalAlign: 'center'
-
+        height: '2.5%',
+        verticalAlign: 'center',
     },
     footerMessage: {
         color: '#FFF',
         fontFamily: 'sans-serif',
+        fontWeight: 'bold'
     }
 }
 export default Footer

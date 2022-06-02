@@ -6,15 +6,17 @@ import api from '../../services/api';
 import { useNavigate } from "react-router-dom";
 
 function OrderHistoryMaterialTable() {
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const columns = [
-    { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
+    { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'desc', editable: 'never' },
+    { title: 'Mesa', field: 'table_id', filterPlaceholder: 'Filtrar por mesa', editable: 'never' },
     { title: 'Cliente', field: 'customer', filterPlaceholder: 'Filtrar por Cliente' },
     { title: 'Desconto', field: 'discount', filterPlaceholder: 'Filtrar por desconto', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
-    { title: 'Total Bruto', field: 'amount', filterPlaceholder: 'Filtrar por total Bruto', editable: 'never', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
-    { title: 'Total Liquido', field: 'netAmount', filterPlaceholder: 'Filtrar por total Líquido', editable: 'never', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
+    { title: 'Total Bruto', field: 'amount', filterPlaceholder: 'Filtrar por tot Bruto', editable: 'never', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
+    { title: 'Total Liquido', field: 'netAmount', filterPlaceholder: 'Filtrar por tot Líquido', editable: 'never', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
     { title: 'Data', field: 'order_date', filterPlaceholder: 'Filtrar por Data', align: 'left', type: 'datetime', },
+    { title: 'Andamento', field: 'in_progress', lookup: { false: 'Finalizado', true: 'Em aberto' }, filterPlaceholder: 'Filtrar por Andamento', align: 'left', editable: 'never' },
   ]
 
   // async function addOrder(newOrder) {
@@ -72,7 +74,7 @@ function OrderHistoryMaterialTable() {
             var dateTime = new Date(newRow.order_date);
             var currentDateTime = new Date(newRow.order_date);
             currentDateTime.setHours(dateTime.getHours() - 3);
-          
+
             const updatedData = [...tableData]
             const updatedOrder = { customer: newRow.customer, discount: newRow.discount, amount: newRow.amount, order_date: currentDateTime };
 

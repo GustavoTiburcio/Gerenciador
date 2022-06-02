@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaHome, FaBook, FaCheck } from 'react-icons/fa';
+import { FaHome, FaBook } from 'react-icons/fa';
 import { AiTwotoneEdit } from "react-icons/ai";
 import { makeStyles } from '@material-ui/styles';
+import { IoRestaurant } from "react-icons/io5";
 
 
 const Menu = () => {
@@ -35,9 +36,9 @@ const Menu = () => {
                     </Link>
                 </li>
                 <li className={styles.menuItem}>
-                    <Link to="/" className={styles.link}>
-                        <FaCheck size={35} color={'#FFF'} />
-                        <span className={styles.text}>Atendimentos</span>
+                    <Link to="/comandas" className={styles.link}>
+                        <IoRestaurant size={35} color={'#FFF'} />
+                        <span className={styles.text}>Comandas</span>
                     </Link>
                 </li>
                 <li className={styles.menuItem}>
