@@ -32,7 +32,7 @@ const Menu = () => {
                 <li className={styles.menuItem}>
                     <Link to="/mesas" className={styles.link}>
                         <AiTwotoneEdit size={35} color={'#FFF'} />
-                        <span className={styles.text}>Mesas</span>
+                        <span className={styles.text}>Cadastro de Mesas</span>
                     </Link>
                 </li>
                 <li className={styles.menuItem}>

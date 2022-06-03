@@ -11,7 +11,7 @@ function OrderProductsMaterialTable() {
   const [tableData, setTableData] = useState([]);
   const columns = [
     { title: 'Código', field: 'product_id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
-    { title: 'Nome', field: 'name', filterPlaceholder: 'Filtrar por Produto' },
+    { title: 'Nome', field: 'name', filterPlaceholder: 'Filtrar por Produto', editable: 'never' },
     { title: 'Quantidade', field: 'quantity', filterPlaceholder: 'Filtrar por Quantidade', align: 'left', },
     { title: 'Preço', field: 'product_price', filterPlaceholder: 'Filtrar por preço', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
   ]

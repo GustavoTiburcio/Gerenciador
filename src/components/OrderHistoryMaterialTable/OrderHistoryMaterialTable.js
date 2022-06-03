@@ -104,7 +104,7 @@ function OrderHistoryMaterialTable() {
         actions={[
           {
             icon: () => <ProductionQuantityLimitsIcon></ProductionQuantityLimitsIcon>,
-            tooltip: 'Alterar Produtos',
+            tooltip: 'Alterar Produtos da Venda',
             onClick: (e, data) => navigate('/produtosVenda', { state: { order: data } })
           }
         ]}
@@ -124,7 +124,7 @@ function OrderHistoryMaterialTable() {
           body: {
             addTooltip: 'Adicionar',
             deleteTooltip: 'Remover',
-            editTooltip: 'Alterar',
+            editTooltip: 'Alterar Dados da Venda',
             emptyDataSourceMessage: 'Nenhum registro para exibir.',
             filterRow: {
               filterTooltip: 'Filtro'

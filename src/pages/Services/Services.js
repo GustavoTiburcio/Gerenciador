@@ -10,6 +10,7 @@ import { ReactComponent as RestaurantTable } from '../../assets/restaurant-table
 function Services() {
     const styles = useStyles();
     const [tables, setTables] = useState([]);
+    const [finishedOrder, setFinishedOrder] = useState([]);
 
     async function getTables() {
         try {
@@ -21,15 +22,25 @@ function Services() {
         }
     }
 
+    async function finishOrderProgress(table_id) {
+        try {
+            const response = await api.patch(`/orders/finishOrderProgress/tableId=${table_id}`);
+            setFinishedOrder(response.data);
+        } catch (error) {
+            console.log(error);
+            throw new Error(400);
+        }
+    }
+
     useEffect(() => {
         getTables()
-    }, [])
+    }, [finishedOrder])
 
     return (
         <div className={styles.container}>
             <Header />
             <div className={styles.body}>
-                <h1 className={styles.titlesDiv}>Mesas</h1>
+                <h1 className={styles.titlesDiv}>Comandas</h1>
                 <div className={styles.legendasDiv}>
                     <span style={{ color: '#3bbf17', fontFamily: 'sans-serif', fontWeight: 'bold' }}>█ Disponível</span>
                     <span style={{ color: '#bf2217', fontFamily: 'sans-serif', fontWeight: 'bold', marginLeft: 10 }}>█ Ocupado</span>
@@ -42,7 +53,7 @@ function Services() {
                     />
                 </div>
                 <div className={styles.tablesDiv}>
-                    {tables.map((tables) => {
+                    {tables.map((table) => {
                         return (
                             <span className={styles.tablesNumber}>
                                 <RestaurantTable
@@ -51,13 +62,18 @@ function Services() {
                                     style={{
                                         height: 150,
                                         width: 200,
-                                        color: tables.available === false ? '#bf2217' : '#3bbf17',
+                                        color: table.available === false ? '#bf2217' : '#3bbf17',
                                         margin: 10,
-                                        cursor: 'pointer',
+                                        cursor: table.available === false ? 'pointer' : 'default',
                                     }}
-                                    onClick={() => {window.confirm(`Fechar comanda da mesa ${tables.number}?`) ? console.log("confirm") : console.log("cancel")}}
-                                    />
-                                    {tables.number}
+                                    onClick={() => {
+                                        if (table.available === false) {
+                                            window.confirm(`Fechar comanda da mesa ${table.number}?`) ? finishOrderProgress(table.number) : console.log("cancel")
+                                        }
+                                    }
+                                    }
+                                />
+                                {table.number}
                             </span>
                         )
                     })}
