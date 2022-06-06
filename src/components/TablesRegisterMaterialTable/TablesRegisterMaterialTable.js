@@ -1,19 +1,21 @@
-import './CategoriesMaterialTable.css';
+import './TablesRegisterMaterialTable.css';
 import MaterialTable from 'material-table';
 import { useEffect, useState } from 'react';
 // import GetAppIcon from '@mui/icons-material/GetApp';
 import api from '../../services/api';
 
-function CategoriesMaterialTable() {
+function TablesRegisterMaterialTable() {
   const [tableData, setTableData] = useState([]);
   const columns = [
     { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
-    { title: 'Categoria', field: 'category', filterPlaceholder: 'Filtrar por Nome' },
+    { title: 'Número da mesa', field: 'number', filterPlaceholder: 'Filtrar por Número' },
+    { title: 'Disponível', field: 'available', lookup: { true: 'Sim', false: 'Não' }, filterPlaceholder: 'Filtrar por Disponibilidade', emptyValue: 'Sim', editable: 'never' },
+    { title: 'Cliente', field: 'customer', filterPlaceholder: 'Filtrar por Cliente', editable: 'never', emptyValue: 'Mesa vazia.. 😥' },
   ]
 
-  async function addCategory(newCategory) {
+  async function addTable(newTable) {
     try {
-      const response = await api.post('/categories', newCategory);
+      const response = await api.post('/tables', newTable);
       return response;
     } catch (error) {
       console.log(error);
@@ -21,19 +23,19 @@ function CategoriesMaterialTable() {
     }
   }
 
-  async function getCategories() {
+  async function getTables() {
     try {
-      const response = await api.get('/categories');
-      setTableData(response.data.categories);
+      const response = await api.get('/tables');
+      setTableData(response.data.tables);
     } catch (error) {
       console.log(error);
       throw new Error(400);
     }
   }
 
-  async function updateCategory(id, newCategory) {
+  async function updateTable(id, newTable) {
     try {
-      const response = await api.put(`/categories/${id}`, newCategory);
+      const response = await api.put(`/tables/${id}`, newTable);
       return response;
     } catch (error) {
       console.log(error);
@@ -41,9 +43,9 @@ function CategoriesMaterialTable() {
     }
   }
 
-  async function removeCategory(id) {
+  async function removeTable(id) {
     try {
-      const response = await api.delete(`/categories/${id}`);
+      const response = await api.delete(`/tables/${id}`);
       return response;
     } catch (error) {
       console.log(error);
@@ -52,7 +54,7 @@ function CategoriesMaterialTable() {
   }
 
   useEffect(() => {
-    getCategories();
+    getTables();
   }, [])
 
   return (
@@ -63,8 +65,9 @@ function CategoriesMaterialTable() {
         data={tableData}
         editable={{
           onRowAdd: (newRow) => new Promise((resolve, reject) => {
-            addCategory(newRow).then(result => {
-              setTableData([...tableData, result.data.createdCategory])
+            newRow['available'] = true;
+            addTable(newRow).then(result => {
+              setTableData([...tableData, result.data.createdTable])
               resolve();
             }, rejected => {
               resolve();
@@ -74,8 +77,8 @@ function CategoriesMaterialTable() {
           }),
           onRowUpdate: (newRow, OldRow) => new Promise((resolve, reject) => {
             const updatedData = [...tableData]
-            const updatedCategory = { category: newRow.category };
-            updateCategory(newRow.id, updatedCategory).then(result => {
+            const updatedTable = { number: newRow.number };
+            updateTable(newRow.id, updatedTable).then(result => {
               updatedData[OldRow.tableData.id] = newRow;
               setTableData(updatedData);
               resolve();
@@ -86,7 +89,7 @@ function CategoriesMaterialTable() {
           }),
           onRowDelete: (selectedRow) => new Promise((resolve, reject) => {
             const updateData = [...tableData]
-            removeCategory(selectedRow.id).then(result => {
+            removeTable(selectedRow.id).then(result => {
               updateData.splice(selectedRow.tableData.id, 1)
               setTableData(updateData);
               resolve();
@@ -111,6 +114,7 @@ function CategoriesMaterialTable() {
           paginationPosition: 'bottom', exportButton: true,
           addRowPosition: 'first', actionsColumnIndex: -1,
           rowStyle: (data, index) => index % 2 === 0 ? { background: '#f5f5f5' } : null,
+          draggable: true,
           headerStyle: { background: '#f3f3f3', fontStyle: 'italic', fontWeight: 'bold' }
         }}
         localization={{
@@ -126,7 +130,7 @@ function CategoriesMaterialTable() {
               filterTooltip: 'Filtro'
             },
             editRow: {
-              deleteText: 'Deseja mesmo remover esta categoria?',
+              deleteText: 'Deseja mesmo remover esta mesa?',
               cancelTooltip: 'Cancelar',
               saveTooltip: 'Confirmar'
             }
@@ -145,11 +149,11 @@ function CategoriesMaterialTable() {
             lastTooltip: 'Última página'
           }
         }}
-        title='Categorias'
+        title='Cadastro de Mesas'
       />
       <br />
     </div>
   );
 }
 
-export default CategoriesMaterialTable;
+export default TablesRegisterMaterialTable;

@@ -1,10 +1,10 @@
-import './ProductsMaterialTable.css';
+import './ProductsRegisterMaterialTable.css';
 import MaterialTable from 'material-table';
 import { useEffect, useState } from 'react';
 // import GetAppIcon from '@mui/icons-material/GetApp';
 import api from '../../services/api';
 
-function ProductsMaterialTable() {
+function ProductsRegisterMaterialTable() {
   const [tableData, setTableData] = useState([]);
   const [categories, setCategories] = useState({ 1: '' });
   const columns = [
@@ -165,11 +165,11 @@ function ProductsMaterialTable() {
             lastTooltip: 'Última página'
           }
         }}
-        title='Produtos'
+        title='Cadastro de Produtos'
       />
       <br />
     </div>
   );
 }
 
-export default ProductsMaterialTable;
+export default ProductsRegisterMaterialTable;
