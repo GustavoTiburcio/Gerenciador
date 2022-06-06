@@ -2,7 +2,7 @@ import './OrderHistoryMaterialTable.css';
 import MaterialTable from 'material-table';
 import { useEffect, useState } from 'react';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import api from '../../services/api';
+import api from '../../../services/api';
 import { useNavigate } from "react-router-dom";
 
 function OrderHistoryMaterialTable() {

@@ -1,7 +1,7 @@
 import './CategoriesRegister.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import CategoriesRegisterMaterialTable from '../../components/CategoriesRegisterMaterialTable/CategoriesRegisterMaterialTable';
+import CategoriesRegisterMaterialTable from '../../components/MaterialTables/CategoriesRegisterMaterialTable/CategoriesRegisterMaterialTable';
 
 function CategoriesRegister() {
 

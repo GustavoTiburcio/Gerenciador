@@ -1,7 +1,7 @@
 import './OrderProductsMaterialTable.css';
 import MaterialTable from 'material-table';
 import { useEffect, useState } from 'react';
-import api from '../../services/api';
+import api from '../../../services/api';
 import { useLocation } from "react-router-dom";
 
 function OrderProductsMaterialTable() {

@@ -1,7 +1,7 @@
 import './ProductsRegister.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import ProductsRegisterMaterialTable from '../../components/ProductsRegisterMaterialTable/ProductsRegisterMaterialTable';
+import ProductsRegisterMaterialTable from '../../components/MaterialTables/ProductsRegisterMaterialTable/ProductsRegisterMaterialTable';
 
 function ProductsRegister() {
 

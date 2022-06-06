@@ -2,7 +2,7 @@ import './CategoriesRegisterMaterialTable.css';
 import MaterialTable from 'material-table';
 import { useEffect, useState } from 'react';
 // import GetAppIcon from '@mui/icons-material/GetApp';
-import api from '../../services/api';
+import api from '../../../services/api';
 
 function CategoriesRegisterMaterialTable() {
   const [tableData, setTableData] = useState([]);
