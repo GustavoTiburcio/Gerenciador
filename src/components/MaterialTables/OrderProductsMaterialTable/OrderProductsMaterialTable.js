@@ -3,15 +3,44 @@ import MaterialTable from 'material-table';
 import { useEffect, useState } from 'react';
 import api from '../../../services/api';
 import { useLocation } from "react-router-dom";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 function OrderProductsMaterialTable() {
   const { state } = useLocation();
   const { order } = state; // Read values passed on state
   // let navigate = useNavigate();
+  const test =[{id:1,name:"test"},{id:2, name:"test2"}]
+  // const defaultProps = {
+  //   options: top100Films,
+  //   getOptionLabel: (option) => option.title,
+  // };
   const [tableData, setTableData] = useState([]);
+  const [value, setValue] = useState(test[0].year);
+  const [inputValue, setInputValue] = useState('');
   const columns = [
     { title: 'Código', field: 'product_id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
-    { title: 'Nome', field: 'name', filterPlaceholder: 'Filtrar por Produto', editable: 'never' },
+    {
+      title: 'Produto', field: 'name', filterPlaceholder: 'Filtrar por Produto', editable: 'onAdd',
+      editComponent: props => (
+        <Autocomplete
+          disablePortal
+          id="combo-box"
+          // value={value}
+          // onChange={(event, newValue) => {
+          //   setValue(newValue);
+          // }}
+          // inputValue={inputValue}
+          // onInputChange={(event, newInputValue) => {
+          //   setInputValue(newInputValue);
+          // }}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
+          options={test}
+          sx={{ width: '100%' }}
+          renderInput={(params) => <TextField {...params} label="Produto" />}
+        />
+      )
+    },
     { title: 'Quantidade', field: 'quantity', filterPlaceholder: 'Filtrar por Quantidade', align: 'left', validate: rowData => rowData.quantity === '' || rowData.quantity === undefined || rowData.quantity === 0 ? 'Preenchimento obrigatório' : '' },
     { title: 'Preço', field: 'product_price', filterPlaceholder: 'Filtrar por preço', align: 'left', type: 'currency', validate: rowData => rowData.product_price === '' || rowData.product_price === undefined || rowData.product_price === 0 ? 'Preenchimento obrigatório' : '', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
   ]
@@ -48,6 +77,15 @@ function OrderProductsMaterialTable() {
         columns={columns}
         data={tableData}
         editable={{
+          onRowAdd: (newRow) => new Promise((resolve, reject) => {
+            // addCategory(newRow).then(result => {
+            //   setTableData([...tableData, result.data.createdCategory])
+            //   resolve();
+            // }, rejected => {
+            resolve();
+            //   alert('Erro ao tentar adicionar.');
+            // });
+          }),
           onRowUpdate: (newRow, OldRow) => new Promise((resolve, reject) => {
             resolve();
           }),

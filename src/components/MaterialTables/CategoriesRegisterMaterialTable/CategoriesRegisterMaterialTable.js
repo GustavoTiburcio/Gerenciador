@@ -1,6 +1,7 @@
 import './CategoriesRegisterMaterialTable.css';
 import MaterialTable from 'material-table';
 import { useEffect, useState } from 'react';
+import TextField from '@mui/material/TextField';
 // import GetAppIcon from '@mui/icons-material/GetApp';
 import api from '../../../services/api';
 
@@ -8,7 +9,20 @@ function CategoriesRegisterMaterialTable() {
   const [tableData, setTableData] = useState([]);
   const columns = [
     { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
-    { title: 'Categoria', field: 'category', filterPlaceholder: 'Filtrar por Nome', validate: rowData => rowData.category === '' || rowData.category === undefined ? 'Preenchimento obrigatório' : '' },
+    {
+      title: 'Categoria', field: 'category', filterPlaceholder: 'Filtrar por Nome',
+      validate: rowData => rowData.category === '' || rowData.category === undefined ? 'Preenchimento obrigatório' : '',
+      // editComponent: props => (
+      //   <TextField
+      //     id="standard-basic"
+      //     variant="standard"
+      //     type="text"
+      //     value={props.value}
+      //     onChange={e => props.onChange(e.target.value)}
+      //     autoFocus={'true'}
+      //   />
+      // )
+    },
   ]
 
   async function addCategory(newCategory) {
@@ -70,7 +84,6 @@ function CategoriesRegisterMaterialTable() {
               resolve();
               alert('Erro ao tentar adicionar.');
             });
-
           }),
           onRowUpdate: (newRow, OldRow) => new Promise((resolve, reject) => {
             const updatedData = [...tableData]
