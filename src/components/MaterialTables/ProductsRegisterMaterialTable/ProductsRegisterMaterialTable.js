@@ -9,9 +9,9 @@ function ProductsRegisterMaterialTable() {
   const [categories, setCategories] = useState({ 1: '' });
   const columns = [
     { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
-    { title: 'Nome', field: 'name', filterPlaceholder: 'Filtrar por Nome' },
-    { title: 'Preço', field: 'price', filterPlaceholder: 'Filtrar por Preço', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
-    { title: 'Categoria', field: 'category_id', lookup: categories, filterPlaceholder: 'Filtrar por Categoria', align: 'left' },
+    { title: 'Nome', field: 'name', filterPlaceholder: 'Filtrar por Nome', validate: rowData => rowData.name === '' || rowData.name === undefined ? 'Preenchimento obrigatório' : '' },
+    { title: 'Preço', field: 'price', filterPlaceholder: 'Filtrar por Preço', align: 'left', type: 'currency', validate: rowData => rowData.price === 0 || rowData.price === undefined ? 'Preenchimento obrigatório' : '', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
+    { title: 'Categoria', field: 'category_id', lookup: categories, filterPlaceholder: 'Filtrar por Categoria', validate: rowData => rowData.category_id === 0 || rowData.category_id === undefined ? 'Preenchimento obrigatório' : '', align: 'left' },
   ]
 
   async function addProduct(newProduct) {

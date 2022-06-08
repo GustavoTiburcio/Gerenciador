@@ -11,8 +11,8 @@ function OrderHistoryMaterialTable() {
   const columns = [
     { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'desc', editable: 'never' },
     { title: 'Mesa', field: 'table_id', filterPlaceholder: 'Filtrar por mesa', editable: 'never' },
-    { title: 'Cliente', field: 'customer', filterPlaceholder: 'Filtrar por Cliente' },
-    { title: 'Desconto', field: 'discount', filterPlaceholder: 'Filtrar por desconto', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
+    { title: 'Cliente', field: 'customer', filterPlaceholder: 'Filtrar por Cliente', validate: rowData => rowData.customer === '' || rowData.customer === undefined ? 'Preenchimento obrigatório' : '' },
+    { title: 'Desconto', field: 'discount', filterPlaceholder: 'Filtrar por desconto', align: 'left', type: 'currency', validate: rowData => rowData.discount === '' || rowData.discount === undefined ? 'Preenchimento obrigatório' : '', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
     { title: 'Total Bruto', field: 'amount', filterPlaceholder: 'Filtrar por tot Bruto', editable: 'never', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
     { title: 'Total Liquido', field: 'netAmount', filterPlaceholder: 'Filtrar por tot Líquido', editable: 'never', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
     { title: 'Data', field: 'order_date', filterPlaceholder: 'Filtrar por Data', align: 'left', type: 'datetime', },

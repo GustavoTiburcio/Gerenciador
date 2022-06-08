@@ -8,7 +8,7 @@ function TablesRegisterMaterialTable() {
   const [tableData, setTableData] = useState([]);
   const columns = [
     { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
-    { title: 'Número da mesa', field: 'number', filterPlaceholder: 'Filtrar por Número' },
+    { title: 'Número da mesa', field: 'number', filterPlaceholder: 'Filtrar por Número', validate: rowData => rowData.number === '' || rowData.number === undefined || /[a-zA-Z]/.test(rowData.number) ? 'Preenchimento obrigatório' : '' },
     { title: 'Disponível', field: 'available', lookup: { true: 'Sim', false: 'Não' }, filterPlaceholder: 'Filtrar por Disponibilidade', emptyValue: 'Sim', editable: 'never' },
     { title: 'Cliente', field: 'customer', filterPlaceholder: 'Filtrar por Cliente', editable: 'never', emptyValue: 'Mesa vazia.. 😥' },
   ]

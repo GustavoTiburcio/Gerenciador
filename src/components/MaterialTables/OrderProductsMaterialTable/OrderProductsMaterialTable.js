@@ -12,8 +12,8 @@ function OrderProductsMaterialTable() {
   const columns = [
     { title: 'Código', field: 'product_id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
     { title: 'Nome', field: 'name', filterPlaceholder: 'Filtrar por Produto', editable: 'never' },
-    { title: 'Quantidade', field: 'quantity', filterPlaceholder: 'Filtrar por Quantidade', align: 'left', },
-    { title: 'Preço', field: 'product_price', filterPlaceholder: 'Filtrar por preço', align: 'left', type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
+    { title: 'Quantidade', field: 'quantity', filterPlaceholder: 'Filtrar por Quantidade', align: 'left', validate: rowData => rowData.quantity === '' || rowData.quantity === undefined || rowData.quantity === 0 ? 'Preenchimento obrigatório' : '' },
+    { title: 'Preço', field: 'product_price', filterPlaceholder: 'Filtrar por preço', align: 'left', type: 'currency', validate: rowData => rowData.product_price === '' || rowData.product_price === undefined || rowData.product_price === 0 ? 'Preenchimento obrigatório' : '', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
   ]
 
   // async function addOrder(newOrder) {

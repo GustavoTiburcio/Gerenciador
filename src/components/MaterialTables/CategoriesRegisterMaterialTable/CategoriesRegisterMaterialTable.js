@@ -8,7 +8,7 @@ function CategoriesRegisterMaterialTable() {
   const [tableData, setTableData] = useState([]);
   const columns = [
     { title: 'Código', field: 'id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
-    { title: 'Categoria', field: 'category', filterPlaceholder: 'Filtrar por Nome' },
+    { title: 'Categoria', field: 'category', filterPlaceholder: 'Filtrar por Nome', validate: rowData => rowData.category === '' || rowData.category === undefined ? 'Preenchimento obrigatório' : '' },
   ]
 
   async function addCategory(newCategory) {
