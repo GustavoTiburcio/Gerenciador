@@ -10,14 +10,10 @@ function OrderProductsMaterialTable() {
   const { state } = useLocation();
   const { order } = state; // Read values passed on state
   // let navigate = useNavigate();
-  const test =[{id:1,name:"test"},{id:2, name:"test2"}]
-  // const defaultProps = {
-  //   options: top100Films,
-  //   getOptionLabel: (option) => option.title,
-  // };
+  const test = [{ id: '1', label: "test" }, { id: '2', label: "test2" }]
   const [tableData, setTableData] = useState([]);
-  const [value, setValue] = useState(test[0].year);
-  const [inputValue, setInputValue] = useState('');
+  const [products, setProducts] = useState([]);
+  const [value, setValue] = useState(null);
   const columns = [
     { title: 'Código', field: 'product_id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
     {
@@ -25,16 +21,13 @@ function OrderProductsMaterialTable() {
       editComponent: props => (
         <Autocomplete
           disablePortal
-          id="combo-box"
-          // value={value}
-          // onChange={(event, newValue) => {
-          //   setValue(newValue);
-          // }}
-          // inputValue={inputValue}
-          // onInputChange={(event, newInputValue) => {
-          //   setInputValue(newInputValue);
-          // }}
           isOptionEqualToValue={(option, value) => option.id === value.id}
+          id="combo-box"
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+            console.log(newValue);
+          }}
           options={test}
           sx={{ width: '100%' }}
           renderInput={(params) => <TextField {...params} label="Produto" />}
@@ -42,7 +35,19 @@ function OrderProductsMaterialTable() {
       )
     },
     { title: 'Quantidade', field: 'quantity', filterPlaceholder: 'Filtrar por Quantidade', align: 'left', validate: rowData => rowData.quantity === '' || rowData.quantity === undefined || rowData.quantity === 0 ? 'Preenchimento obrigatório' : '' },
-    { title: 'Preço', field: 'product_price', filterPlaceholder: 'Filtrar por preço', align: 'left', type: 'currency', validate: rowData => rowData.product_price === '' || rowData.product_price === undefined || rowData.product_price === 0 ? 'Preenchimento obrigatório' : '', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 } },
+    {
+      title: 'Preço', field: 'product_price', filterPlaceholder: 'Filtrar por preço', align: 'left', type: 'currency',
+      validate: rowData => rowData.product_price === '' || rowData.product_price === undefined || rowData.product_price === 0 ? 'Preenchimento obrigatório' : '',
+      currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 },
+    },
+    // {
+    //   title: 'Preço', field: 'product_price', filterPlaceholder: 'Filtrar por preço', align: 'left', type: 'currency',
+    //   validate: rowData => rowData.product_price === '' || rowData.product_price === undefined || rowData.product_price === 0 ? 'Preenchimento obrigatório' : '',
+    //   currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 },
+    //   editComponent: {
+
+    //   }
+    // },
   ]
 
   // async function addOrder(newOrder) {
@@ -64,10 +69,21 @@ function OrderProductsMaterialTable() {
       throw new Error(400);
     }
   }
+  async function getProducts() {
+    try {
+      const response = await api.get('/products');
+      setProducts(response.data.products);
+      console.log(response.data.products)
+    } catch (error) {
+      console.log(error);
+      throw new Error(400);
+    }
+  }
 
 
   useEffect(() => {
     getOrders();
+    getProducts();
   }, [])
 
   return (
