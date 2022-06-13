@@ -9,11 +9,17 @@ import Autocomplete from '@mui/material/Autocomplete';
 function OrderProductsMaterialTable() {
   const { state } = useLocation();
   const { order } = state; // Read values passed on state
-  // let navigate = useNavigate();
-  const test = [{ id: '1', label: "test" }, { id: '2', label: "test2" }]
   const [tableData, setTableData] = useState([]);
   const [products, setProducts] = useState([]);
+  // const [price, setPrice] = useState('');
+  let price = '';
   const [value, setValue] = useState(null);
+
+  // const handleChange = e => {
+  //   console.log(e.target.value)
+  //   setPrice(e.target.value)
+  // }
+
   const columns = [
     { title: 'Código', field: 'product_id', filterPlaceholder: 'Filtrar por Código', align: 'left', defaultSort: 'asc', editable: 'never' },
     {
@@ -25,29 +31,41 @@ function OrderProductsMaterialTable() {
           id="combo-box"
           value={value}
           onChange={(event, newValue) => {
-            setValue(newValue);
+            if (newValue) {
+              setValue(newValue);
+              price = newValue.price;
+              // setPrice(newValue.price)
+            }
             console.log(newValue);
           }}
-          options={test}
+          options={products}
           sx={{ width: '100%' }}
           renderInput={(params) => <TextField {...params} label="Produto" />}
         />
       )
     },
     { title: 'Quantidade', field: 'quantity', filterPlaceholder: 'Filtrar por Quantidade', align: 'left', validate: rowData => rowData.quantity === '' || rowData.quantity === undefined || rowData.quantity === 0 ? 'Preenchimento obrigatório' : '' },
-    {
-      title: 'Preço', field: 'product_price', filterPlaceholder: 'Filtrar por preço', align: 'left', type: 'currency',
-      validate: rowData => rowData.product_price === '' || rowData.product_price === undefined || rowData.product_price === 0 ? 'Preenchimento obrigatório' : '',
-      currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 },
-    },
     // {
     //   title: 'Preço', field: 'product_price', filterPlaceholder: 'Filtrar por preço', align: 'left', type: 'currency',
     //   validate: rowData => rowData.product_price === '' || rowData.product_price === undefined || rowData.product_price === 0 ? 'Preenchimento obrigatório' : '',
     //   currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 },
-    //   editComponent: {
-
-    //   }
     // },
+    {
+      title: 'Preço', field: 'product_price', filterPlaceholder: 'Filtrar por preço', align: 'left', 
+      type: 'currency', currencySetting: { locale: 'pt-BR', currencyCode: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 },
+      editComponent: props => (
+        <TextField
+          //error={rowData => rowData.product_price === '' || rowData.product_price === undefined || rowData.product_price === 0}
+          // helperText='Preenchimento obrigatório'
+          value={price}
+          onChange={e => {price = e.value}}
+          // type='number'
+          placeholder='Preço'
+          variant='standard'
+          //autoFocus
+        />
+      )
+    },
   ]
 
   // async function addOrder(newOrder) {
@@ -72,14 +90,15 @@ function OrderProductsMaterialTable() {
   async function getProducts() {
     try {
       const response = await api.get('/products');
-      setProducts(response.data.products);
-      console.log(response.data.products)
+      const prods = response.data.products.map((prod) => {
+        return { id: prod.id, label: prod.name, price: prod.price }
+      })
+      setProducts(prods);
     } catch (error) {
       console.log(error);
       throw new Error(400);
     }
   }
-
 
   useEffect(() => {
     getOrders();
